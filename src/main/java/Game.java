@@ -26,44 +26,35 @@ public class Game {
 
     public char Winner() {
         //if the positions in first row are taken
-        if (_board.TileAt(0, 0).Symbol != ' ' &&
-                _board.TileAt(0, 1).Symbol != ' ' &&
-                _board.TileAt(0, 2).Symbol != ' ') {
-            //if first row is full with same symbol
-            if (_board.TileAt(0, 0).Symbol ==
-                    _board.TileAt(0, 1).Symbol &&
-                    _board.TileAt(0, 2).Symbol == _board.TileAt(0, 1).Symbol) {
-                return _board.TileAt(0, 0).Symbol;
-            }
-        }
+        if (winnerInRow(0))
+            return _board.TileAt(0, 0).Symbol;
 
         //if the positions in first row are taken
-        if (_board.TileAt(1, 0).Symbol != ' ' &&
-                _board.TileAt(1, 1).Symbol != ' ' &&
-                _board.TileAt(1, 2).Symbol != ' ') {
-            //if middle row is full with same symbol
-            if (_board.TileAt(1, 0).Symbol ==
-                    _board.TileAt(1, 1).Symbol &&
-                    _board.TileAt(1, 2).Symbol ==
-                            _board.TileAt(1, 1).Symbol) {
-                return _board.TileAt(1, 0).Symbol;
-            }
-        }
+        if (winnerInRow(1))
+            return _board.TileAt(1, 0).Symbol;
 
         //if the positions in first row are taken
-        if (_board.TileAt(2, 0).Symbol != ' ' &&
-                _board.TileAt(2, 1).Symbol != ' ' &&
-                _board.TileAt(2, 2).Symbol != ' ') {
-            //if middle row is full with same symbol
-            if (_board.TileAt(2, 0).Symbol ==
-                    _board.TileAt(2, 1).Symbol &&
-                    _board.TileAt(2, 2).Symbol ==
-                            _board.TileAt(2, 1).Symbol) {
-                return _board.TileAt(2, 0).Symbol;
-            }
-        }
+        if (winnerInRow(2))
+            return _board.TileAt(2, 0).Symbol;
 
         return ' ';
+    }
+
+    private boolean winnerInRow(int rowNumber) {
+        if (rowIsComplete(rowNumber)) {
+            return tilesHasTheSameSymbol(rowNumber);
+        }
+        return false;
+    }
+
+    private boolean tilesHasTheSameSymbol(int rowNumber) {
+        return _board.TileAt(rowNumber, 0).Symbol == _board.TileAt(rowNumber, 1).Symbol
+                && _board.TileAt(rowNumber, 2).Symbol == _board.TileAt(rowNumber, 1).Symbol;
+    }
+
+    private boolean rowIsComplete(int rowNumber) {
+        return _board.TileAt(rowNumber, 0).Symbol != ' ' && _board.TileAt(rowNumber, 1).Symbol != ' '
+                && _board.TileAt(rowNumber, 2).Symbol != ' ';
     }
 }
 
