@@ -5,12 +5,13 @@ public class Game{
     public static final int SECOND_ROW = 1;
     public static final int THIRD_ROW = 2;
     public static final int FIRST_COLUMN = 0;
+    public static final int NUMBER_OF_ROWS = 3;
     private char _lastSymbol = EMPTY_TILE;
     private Board _board = new Board();
 
-    public void Play(char symbol, int x, int y) throws Exception{
+    public void Play(char symbol, int row, int col) throws Exception{
 
-        Position position = new Position(x, y);
+        Position position = new Position(row, col);
 
         if(isFirstMove()){
             firstPlayerHaveToBeXSymbol(symbol);
@@ -51,16 +52,11 @@ public class Game{
     }
 
     public char Winner(){
-        if(_board.winnerInRow(FIRST_ROW)){
-            return _board.TileAt(new Position(FIRST_ROW, FIRST_COLUMN)).Symbol;
-        }
 
-        if(_board.winnerInRow(SECOND_ROW)){
-            return _board.TileAt(new Position(SECOND_ROW, FIRST_COLUMN)).Symbol;
-        }
-
-        if(_board.winnerInRow(THIRD_ROW)){
-            return _board.TileAt(new Position(THIRD_ROW, FIRST_COLUMN)).Symbol;
+        for (int row = FIRST_ROW; row < NUMBER_OF_ROWS; row++) {
+            if (_board.winnerInRow(row)) {
+                return _board.TileAt(new Position(row, FIRST_COLUMN)).Symbol;
+            }
         }
 
         return EMPTY_TILE;

@@ -13,11 +13,11 @@ public class Board{
 
     public Board(){
 
-        for(int i = FIRST_ROW; i < NUMBER_OF_ROWS; i++){
-            for(int j = FIRST_COLUMN; j < NUMBER_OF_COLS; j++){
+        for(int row = FIRST_ROW; row < NUMBER_OF_ROWS; row++){
+            for(int col = FIRST_COLUMN; col < NUMBER_OF_COLS; col++){
                 Tile tile = new Tile();
-                tile.position = new Position(i, j);
-                tile.Symbol = ' ';
+                tile.position = new Position(row, col);
+                tile.Symbol = EMPTY_TILE;
                 _plays.add(tile);
             }
         }
@@ -25,7 +25,7 @@ public class Board{
 
     public Tile TileAt(Position position){
         for(Tile t : _plays){
-            if(t.position.X == position.X && t.position.Y == position.Y){
+            if(t.position.getRow() == position.getRow() && t.position.getCol() == position.getCol()){
                 return t;
             }
         }
@@ -36,27 +36,27 @@ public class Board{
         TileAt(position).Symbol = symbol;
     }
 
-    private boolean rowIsComplete(int rowNumber){
-        return tileIsNotEmpty(rowNumber, FIRST_COLUMN) && tileIsNotEmpty(rowNumber, SECOND_COLUMN)
-                && tileIsNotEmpty(rowNumber, THIRD_COLUMN);
+    private boolean rowIsComplete(int row){
+        return tileIsNotEmpty(row, FIRST_COLUMN) && tileIsNotEmpty(row, SECOND_COLUMN)
+                && tileIsNotEmpty(row, THIRD_COLUMN);
     }
 
-    private boolean tileIsNotEmpty(int rowNumber, int i){
-        return TileAt(new Position(rowNumber, i)).Symbol != EMPTY_TILE;
+    private boolean tileIsNotEmpty(int row, int col){
+        return TileAt(new Position(row, col)).Symbol != EMPTY_TILE;
     }
 
-    private boolean tilesInRowHaveTheSameSymbol(int rowNumber){
-        return tilesHaveTheSameSymbol(rowNumber, FIRST_COLUMN)
-                && tilesHaveTheSameSymbol(rowNumber, THIRD_COLUMN);
+    private boolean tilesInRowHaveTheSameSymbol(int row){
+        return tilesHaveTheSameSymbol(row, FIRST_COLUMN)
+                && tilesHaveTheSameSymbol(row, THIRD_COLUMN);
     }
 
-    private boolean tilesHaveTheSameSymbol(int rowNumber, int i){
-        return TileAt(new Position(rowNumber, i)).Symbol == TileAt(new Position(rowNumber, SECOND_COLUMN)).Symbol;
+    private boolean tilesHaveTheSameSymbol(int row, int col){
+        return TileAt(new Position(row, col)).Symbol == TileAt(new Position(row, SECOND_COLUMN)).Symbol;
     }
 
-    public boolean winnerInRow(int rowNumber){
-        if(rowIsComplete(rowNumber)){
-            return tilesInRowHaveTheSameSymbol(rowNumber);
+    public boolean winnerInRow(int row){
+        if(rowIsComplete(row)){
+            return tilesInRowHaveTheSameSymbol(row);
         }
         return false;
     }

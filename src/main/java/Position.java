@@ -1,10 +1,18 @@
 public class Position{
 
-    public int X;
-    public int Y;
+    private int row;
+    private int col;
 
-    public Position(int x, int y){
-        X = x;
-        Y = y;
+    public Position(int row, int col){
+        this.row = row;
+        this.col = col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
     }
 }
