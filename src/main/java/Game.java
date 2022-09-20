@@ -14,15 +14,11 @@ public class Game{
             throw new Exception("Invalid next player");
         }
 
-        if(isNotEmptyTile(position)){
+        if(_board.isNotEmptyTile(position, this)){
             throw new Exception("Invalid position");
         }
 
         updateGameState(symbol, position);
-    }
-
-    private boolean isNotEmptyTile(Position position){
-        return _board.TileAt(position).Symbol != ' ';
     }
 
     private boolean isRepeatedPlayerTurn(char symbol){

@@ -25,27 +25,35 @@ public class Board{
     }
 
     public void AddTileAt(char symbol, Position position){
-        Tile newTile = new Tile();
-        newTile.position = position;
-        newTile.Symbol = symbol;
-
         TileAt(position).Symbol = symbol;
     }
 
     private boolean rowIsComplete(int rowNumber){
-        return TileAt(new Position(rowNumber, 0)).Symbol != ' ' && TileAt(new Position(rowNumber, 1)).Symbol != ' '
-                && TileAt(new Position(rowNumber, 2)).Symbol != ' ';
+        return tileIsNotEmpty(rowNumber, 0) && tileIsNotEmpty(rowNumber, 1)
+                && tileIsNotEmpty(rowNumber, 2);
     }
 
-    private boolean tilesHasTheSameSymbol(int rowNumber){
-        return TileAt(new Position(rowNumber, 0)).Symbol == TileAt(new Position(rowNumber, 1)).Symbol
-                && TileAt(new Position(rowNumber, 2)).Symbol == TileAt(new Position(rowNumber, 1)).Symbol;
+    private boolean tileIsNotEmpty(int rowNumber, int i){
+        return TileAt(new Position(rowNumber, i)).Symbol != ' ';
+    }
+
+    private boolean tilesInRowHaveTheSameSymbol(int rowNumber){
+        return tilesHaveTheSameSymbol(rowNumber, 0)
+                && tilesHaveTheSameSymbol(rowNumber, 2);
+    }
+
+    private boolean tilesHaveTheSameSymbol(int rowNumber, int i){
+        return TileAt(new Position(rowNumber, i)).Symbol == TileAt(new Position(rowNumber, 1)).Symbol;
     }
 
     public boolean winnerInRow(int rowNumber){
         if(rowIsComplete(rowNumber)){
-            return tilesHasTheSameSymbol(rowNumber);
+            return tilesInRowHaveTheSameSymbol(rowNumber);
         }
         return false;
+    }
+
+   public boolean isNotEmptyTile(Position position, Game game){
+        return TileAt(position).Symbol != ' ';
     }
 }
