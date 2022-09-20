@@ -12,42 +12,65 @@ public class Board
             for (int j = 0; j < 3; j++)
             {
                 Tile tile = new Tile();
-                tile.X = i;
-                tile.Y = j;
+                tile.position = new Position();
+                tile.position.X = i;
+                tile.position.Y = j;
                 tile.Symbol = ' ';
                 _plays.add(tile);
             }
         }
     }
 
-    public Tile TileAt(int x, int y)
+    public Tile TileAt(Position position)
     {
         for (Tile t : _plays) {
-            if (t.X == x && t.Y == y){
+            if (t.position.X == position.X && t.position.Y == position.Y){
                 return t;
             }
         }
         return null;
     }
 
-    public void AddTileAt(char symbol, int x, int y)
+    public void AddTileAt(char symbol, Position position)
     {
         Tile newTile = new Tile();
-        newTile.X = x;
-        newTile.Y = y;
+        newTile.position = position;
         newTile.Symbol = symbol;
 
-        TileAt(x,y).Symbol = symbol;
+        TileAt(position).Symbol = symbol;
     }
 
     private boolean rowIsComplete(int rowNumber) {
-        return TileAt(rowNumber, 0).Symbol != ' ' && TileAt(rowNumber, 1).Symbol != ' '
-                && TileAt(rowNumber, 2).Symbol != ' ';
+        Position positionZeroTile = new Position();
+        positionZeroTile.X = rowNumber;
+        positionZeroTile.Y = 0;
+
+        Position positionFirstTile = new Position();
+        positionFirstTile.X = rowNumber;
+        positionFirstTile.Y = 1;
+
+        Position positionSecondTile = new Position();
+        positionSecondTile.X = rowNumber;
+        positionSecondTile.Y = 2;
+        return TileAt(positionFirstTile).Symbol != ' ' && TileAt(positionFirstTile).Symbol != ' '
+                && TileAt(positionSecondTile).Symbol != ' ';
     }
 
     private boolean tilesHasTheSameSymbol(int rowNumber) {
-        return TileAt(rowNumber, 0).Symbol == TileAt(rowNumber, 1).Symbol
-                && TileAt(rowNumber, 2).Symbol == TileAt(rowNumber, 1).Symbol;
+        Position positionZeroTile = new Position();
+        positionZeroTile.X = rowNumber;
+        positionZeroTile.Y = 0;
+
+        Position positionFirstTile = new Position();
+        positionFirstTile.X = rowNumber;
+        positionFirstTile.Y = 1;
+
+        Position positionSecondTile = new Position();
+        positionSecondTile.X = rowNumber;
+        positionSecondTile.Y = 2;
+
+        return TileAt(positionZeroTile).Symbol == TileAt(positionFirstTile).Symbol
+                && TileAt(positionSecondTile).Symbol == TileAt(positionFirstTile).Symbol;
     }
 
     public boolean winnerInRow(int rowNumber) {

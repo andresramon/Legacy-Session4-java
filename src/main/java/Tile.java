@@ -1,7 +1,7 @@
 
+
 public class Tile
 {
-    public int X;
-    public int Y;
+    public Position position;
     public char Symbol;
 }
