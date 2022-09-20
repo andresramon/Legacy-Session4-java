@@ -45,15 +45,14 @@ public class Game{
     }
 
     public char Winner(){
-        //if the positions in first row are taken
         if(_board.winnerInRow(0)){
             return _board.TileAt(new Position(0, 0)).Symbol;
         }
-        //if the positions in first row are taken
+
         if(_board.winnerInRow(1)){
             return _board.TileAt(new Position(1, 0)).Symbol;
         }
-        //if the positions in first row are taken
+
         if(_board.winnerInRow(2)){
             return _board.TileAt(new Position(2, 0)).Symbol;
         }
