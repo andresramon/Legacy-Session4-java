@@ -1,5 +1,11 @@
 public class Game{
-    private char _lastSymbol = ' ';
+    public static final char EMPTY_TILE = ' ';
+    public static final char ZERO = 'O';
+    public static final int FIRST_ROW = 0;
+    public static final int SECOND_ROW = 1;
+    public static final int THIRD_ROW = 2;
+    public static final int FIRST_COLUMN = 0;
+    private char _lastSymbol = EMPTY_TILE;
     private Board _board = new Board();
 
     public void Play(char symbol, int x, int y) throws Exception{
@@ -32,11 +38,11 @@ public class Game{
     }
 
     private boolean isZeroSymbol(char symbol){
-        return symbol == 'O';
+        return symbol == ZERO;
     }
 
     private boolean isFirstMove(){
-        return _lastSymbol == ' ';
+        return _lastSymbol == EMPTY_TILE;
     }
 
     private void updateGameState(char symbol, Position position){
@@ -45,19 +51,19 @@ public class Game{
     }
 
     public char Winner(){
-        if(_board.winnerInRow(0)){
-            return _board.TileAt(new Position(0, 0)).Symbol;
+        if(_board.winnerInRow(FIRST_ROW)){
+            return _board.TileAt(new Position(FIRST_ROW, FIRST_COLUMN)).Symbol;
         }
 
-        if(_board.winnerInRow(1)){
-            return _board.TileAt(new Position(1, 0)).Symbol;
+        if(_board.winnerInRow(SECOND_ROW)){
+            return _board.TileAt(new Position(SECOND_ROW, FIRST_COLUMN)).Symbol;
         }
 
-        if(_board.winnerInRow(2)){
-            return _board.TileAt(new Position(2, 0)).Symbol;
+        if(_board.winnerInRow(THIRD_ROW)){
+            return _board.TileAt(new Position(THIRD_ROW, FIRST_COLUMN)).Symbol;
         }
 
-        return ' ';
+        return EMPTY_TILE;
     }
 
 }
