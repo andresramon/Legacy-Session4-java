@@ -39,4 +39,21 @@ public class Board
 
         TileAt(x,y).Symbol = symbol;
     }
+
+    private boolean rowIsComplete(int rowNumber) {
+        return TileAt(rowNumber, 0).Symbol != ' ' && TileAt(rowNumber, 1).Symbol != ' '
+                && TileAt(rowNumber, 2).Symbol != ' ';
+    }
+
+    private boolean tilesHasTheSameSymbol(int rowNumber) {
+        return TileAt(rowNumber, 0).Symbol == TileAt(rowNumber, 1).Symbol
+                && TileAt(rowNumber, 2).Symbol == TileAt(rowNumber, 1).Symbol;
+    }
+
+    public boolean winnerInRow(int rowNumber) {
+        if (rowIsComplete(rowNumber)) {
+            return tilesHasTheSameSymbol(rowNumber);
+        }
+        return false;
+    }
 }
