@@ -4,9 +4,7 @@ public class Game{
 
     public void Play(char symbol, int x, int y) throws Exception{
 
-        Position position = new Position();
-        position.X = x;
-        position.Y = y;
+        Position position = new Position(x, y);
 
         if(isFirstMove()){
             firstPlayerHaveToBeXSymbol(symbol);
@@ -51,24 +49,17 @@ public class Game{
     }
 
     public char Winner(){
-        Position position = new Position();
         //if the positions in first row are taken
         if(_board.winnerInRow(0)){
-            position.X = 0;
-            position.Y = 0;
-            return _board.TileAt(position).Symbol;
+            return _board.TileAt(new Position(0, 0)).Symbol;
         }
         //if the positions in first row are taken
         if(_board.winnerInRow(1)){
-            position.X = 1;
-            position.Y = 0;
-            return _board.TileAt(position).Symbol;
+            return _board.TileAt(new Position(1, 0)).Symbol;
         }
         //if the positions in first row are taken
         if(_board.winnerInRow(2)){
-            position.X = 2;
-            position.Y = 0;
-            return _board.TileAt(position).Symbol;
+            return _board.TileAt(new Position(2, 0)).Symbol;
         }
 
         return ' ';
