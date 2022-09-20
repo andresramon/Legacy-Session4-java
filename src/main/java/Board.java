@@ -24,9 +24,9 @@ public class Board{
     }
 
     public Tile TileAt(Position position){
-        for(Tile t : _plays){
-            if(t.position.getRow() == position.getRow() && t.position.getCol() == position.getCol()){
-                return t;
+        for(Tile tile : _plays){
+            if(tile.position.getRow() == position.getRow() && tile.position.getCol() == position.getCol()){
+                return tile;
             }
         }
         return null;
@@ -61,7 +61,17 @@ public class Board{
         return false;
     }
 
-   public boolean isNotEmptyTile(Position position, Game game){
+    public boolean isNotEmptyTile(Position position, Game game){
         return TileAt(position).Symbol != EMPTY_TILE;
+    }
+
+    public char winner() {
+        for (int row = FIRST_ROW; row < NUMBER_OF_ROWS; row++) {
+            if (winnerInRow(row)) {
+                return TileAt(new Position(row, FIRST_COLUMN)).Symbol;
+            }
+        }
+
+        return EMPTY_TILE;
     }
 }

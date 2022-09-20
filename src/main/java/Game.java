@@ -1,11 +1,6 @@
 public class Game{
-    public static final char EMPTY_TILE = ' ';
-    public static final char ZERO = 'O';
-    public static final int FIRST_ROW = 0;
-    public static final int SECOND_ROW = 1;
-    public static final int THIRD_ROW = 2;
-    public static final int FIRST_COLUMN = 0;
-    public static final int NUMBER_OF_ROWS = 3;
+    private static final char EMPTY_TILE = ' ';
+    private static final char ZERO = 'O';
     private char _lastSymbol = EMPTY_TILE;
     private Board _board = new Board();
 
@@ -53,13 +48,7 @@ public class Game{
 
     public char Winner(){
 
-        for (int row = FIRST_ROW; row < NUMBER_OF_ROWS; row++) {
-            if (_board.winnerInRow(row)) {
-                return _board.TileAt(new Position(row, FIRST_COLUMN)).Symbol;
-            }
-        }
-
-        return EMPTY_TILE;
+        return _board.winner();
     }
 
 }
