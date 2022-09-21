@@ -16,7 +16,7 @@ public class Game{
             throw new Exception("Invalid next player");
         }
 
-        if(_board.isNotEmptyTile(position, this)){
+        if(_board.tileIsNotEmpty(position)){
             throw new Exception("Invalid position");
         }
 
@@ -43,11 +43,10 @@ public class Game{
 
     private void updateGameState(char symbol, Position position){
         _lastSymbol = symbol;
-        _board.AddTileAt(symbol, position);
+        _board.addSymbolToTile(symbol, position);
     }
 
     public char Winner(){
-
         return _board.winner();
     }
 
