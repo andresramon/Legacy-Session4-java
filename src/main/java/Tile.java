@@ -12,7 +12,7 @@ public class Tile
     }
 
     boolean isInPosition(Position position){
-        return this.position.getRow() == position.getRow() && this.position.getCol() == position.getCol();
+        return this.position.equals(position);
     }
 
     public boolean isNotEmpty(){

@@ -1,18 +1,19 @@
 public class Game{
-    private static final char EMPTY_TILE = ' ';
-    private static final char ZERO = 'O';
-    private char _lastSymbol = EMPTY_TILE;
+
+    private EnumSymbol _lastSymbol = EnumSymbol.EMPTY;
     private Board _board = new Board();
 
     public void Play(char symbol, int row, int col) throws Exception{
 
         Position position = new Position(row, col);
 
+        EnumSymbol enumSymbol = EnumSymbol.getEnumSymbol(symbol);
+
         if(isFirstMove()){
-            firstPlayerHaveToBeXSymbol(symbol);
+            firstPlayerHaveToBeXSymbol(enumSymbol);
         }
 
-        if(isRepeatedPlayerTurn(symbol)){
+        if(isRepeatedPlayerTurn(enumSymbol)){
             throw new Exception("Invalid next player");
         }
 
@@ -20,30 +21,30 @@ public class Game{
             throw new Exception("Invalid position");
         }
 
-        updateGameState(symbol, position);
+        updateGameState(enumSymbol, position);
     }
 
-    private boolean isRepeatedPlayerTurn(char symbol){
+    private boolean isRepeatedPlayerTurn(EnumSymbol symbol){
         return symbol == _lastSymbol;
     }
 
-    private void firstPlayerHaveToBeXSymbol(char symbol) throws Exception{
+    private void firstPlayerHaveToBeXSymbol(EnumSymbol symbol) throws Exception{
         if(isZeroSymbol(symbol)){
             throw new Exception("Invalid first player");
         }
     }
 
-    private boolean isZeroSymbol(char symbol){
-        return symbol == ZERO;
+    private boolean isZeroSymbol(EnumSymbol symbol){
+        return symbol == EnumSymbol.ZERO;
     }
 
     private boolean isFirstMove(){
-        return _lastSymbol == EMPTY_TILE;
+        return _lastSymbol == EnumSymbol.EMPTY;
     }
 
-    private void updateGameState(char symbol, Position position){
+    private void updateGameState(EnumSymbol symbol, Position position){
         _lastSymbol = symbol;
-        _board.addSymbolToTile(symbol, position);
+        _board.addSymbolToTile(symbol.getCode(), position);
     }
 
     public char Winner(){
