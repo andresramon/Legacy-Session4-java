@@ -4,11 +4,11 @@ public class Tile
 {
     public static final char EMPTY_TILE = ' ';
     private Position position;
-    private char Symbol;
+    private EnumSymbol Symbol;
 
     public Tile(Position position){
         this.position = position;
-        this.Symbol = EMPTY_TILE;
+        this.Symbol = EnumSymbol.EMPTY;
     }
 
     boolean isInPosition(Position position){
@@ -16,14 +16,14 @@ public class Tile
     }
 
     public boolean isNotEmpty(){
-        return Symbol != EMPTY_TILE;
+        return Symbol !=  EnumSymbol.EMPTY;
     }
 
-    public void setSymbol(char symbol){
+    public void setSymbol(EnumSymbol symbol){
         Symbol = symbol;
     }
 
-    public char getSymbol(){
+    public EnumSymbol getSymbol(){
         return Symbol;
     }
 

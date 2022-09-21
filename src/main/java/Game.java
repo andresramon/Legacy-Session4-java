@@ -44,11 +44,11 @@ public class Game{
 
     private void updateGameState(EnumSymbol symbol, Position position){
         _lastSymbol = symbol;
-        _board.addSymbolToTile(symbol.getCode(), position);
+        _board.addSymbolToTile(symbol, position);
     }
 
     public char Winner(){
-        return _board.winner();
+        return _board.winner().getCode();
     }
 
 }

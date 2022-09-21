@@ -34,7 +34,7 @@ public class Board{
         return null;
     }
 
-    public void addSymbolToTile(char symbol, Position position){
+    public void addSymbolToTile(EnumSymbol symbol, Position position){
         TileAt(position).setSymbol(symbol);
     }
 
@@ -55,14 +55,14 @@ public class Board{
         return false;
     }
 
-    public char winner() {
+    public EnumSymbol winner() {
         for (int row = FIRST_ROW; row < NUMBER_OF_ROWS; row++) {
             if (winnerInRow(row)) {
                 return TileAt(new Position(row, FIRST_COLUMN)).getSymbol();
             }
         }
 
-        return Tile.EMPTY_TILE;
+        return EnumSymbol.EMPTY;
     }
 
     boolean tileIsNotEmpty(Position position){
