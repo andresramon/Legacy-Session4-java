@@ -25,37 +25,37 @@ public class Board{
         tiles.add(tile);
     }
 
-    private Tile TileAt(Position position){
+    private Tile TileAt(Position position) throws Exception{
         for(Tile tile : tiles){
             if(tile.isInPosition(position)){
                 return tile;
             }
         }
-        return null;
+        throw new Exception("tile out of range or position");
     }
 
-    public void addSymbolToTile(EnumSymbol symbol, Position position){
+    public void addSymbolToTile(EnumSymbol symbol, Position position) throws Exception{
         TileAt(position).setSymbol(symbol);
     }
 
-    private boolean rowIsComplete(int row){
+    private boolean rowIsComplete(int row) throws Exception{
         return TileAt(new Position(row, FIRST_COLUMN)).isNotEmpty() && TileAt(new Position(row, SECOND_COLUMN)).isNotEmpty()
                 && TileAt(new Position(row, THIRD_COLUMN)).isNotEmpty();
     }
 
-    private boolean fullRowHaveTheSameSymbol(int row){
+    private boolean fullRowHaveTheSameSymbol(int row) throws Exception{
         return TileAt(new Position(row, FIRST_COLUMN)).haveTheSameSymbol(TileAt(new Position(row, SECOND_COLUMN)))
                 && TileAt(new Position(row, THIRD_COLUMN)).haveTheSameSymbol(TileAt(new Position(row, SECOND_COLUMN)));
     }
 
-    private boolean winnerInRow(int row){
+    private boolean winnerInRow(int row) throws Exception{
         if(rowIsComplete(row)){
             return fullRowHaveTheSameSymbol(row);
         }
         return false;
     }
 
-    public EnumSymbol winner() {
+    public EnumSymbol winner() throws Exception{
         for (int row = FIRST_ROW; row < NUMBER_OF_ROWS; row++) {
             if (winnerInRow(row)) {
                 return TileAt(new Position(row, FIRST_COLUMN)).getSymbol();
@@ -65,7 +65,7 @@ public class Board{
         return EnumSymbol.EMPTY;
     }
 
-    boolean tileIsNotEmpty(Position position){
+    boolean tileIsNotEmpty(Position position) throws Exception{
         return TileAt(position).isNotEmpty();
     }
 }

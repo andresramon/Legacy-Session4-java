@@ -1,8 +1,4 @@
-
-
-public class Tile
-{
-    public static final char EMPTY_TILE = ' ';
+public class Tile{
     private Position position;
     private EnumSymbol Symbol;
 
@@ -16,15 +12,15 @@ public class Tile
     }
 
     public boolean isNotEmpty(){
-        return Symbol !=  EnumSymbol.EMPTY;
-    }
-
-    public void setSymbol(EnumSymbol symbol){
-        Symbol = symbol;
+        return Symbol != EnumSymbol.EMPTY;
     }
 
     public EnumSymbol getSymbol(){
         return Symbol;
+    }
+
+    public void setSymbol(EnumSymbol symbol){
+        Symbol = symbol;
     }
 
     boolean haveTheSameSymbol(Tile otherTile){

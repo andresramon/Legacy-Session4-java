@@ -42,12 +42,12 @@ public class Game{
         return _lastSymbol == EnumSymbol.EMPTY;
     }
 
-    private void updateGameState(EnumSymbol symbol, Position position){
+    private void updateGameState(EnumSymbol symbol, Position position) throws Exception{
         _lastSymbol = symbol;
         _board.addSymbolToTile(symbol, position);
     }
 
-    public char Winner(){
+    public char Winner() throws Exception{
         return _board.winner().getCode();
     }
 
